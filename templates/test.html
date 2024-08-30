@@ -1,0 +1,54 @@
+{% extends "index.html" %}
+<!--ЭТО KОД, ОТВЕЧАЮЩИЙ ЗА КРАСОТУ ДИАЛОГА-->
+{% block content %}
+    <meta charset="UTF-8">
+    <link href="{{ url_for('static', filename='css/test.css') }}" rel="stylesheet">
+
+    <!--наше сообщение, те картинка + сообщене + голос(скоро)-->
+    <div class="container">
+        <div class="messages" id="messages">
+            <!-- Выводим сообщения в нормальном порядке -->
+            <!-- Выводим сообщения в нормальном порядке -->
+
+            {% for i in story_content %}
+                <div class="message {% if i[1] %} even {% endif %}">
+                    {{ i[0] }}
+                    {% if i[1] %}
+                        <div class="image-msg-container" style="margin-bottom: 3%; text-align: center;">
+                            <img class="async-image" data-img-id="{{ i[3] }}" src="../static/img/giv.gif"
+                                 alt="Loading Image {{ img_id }}"/>
+                        </div>
+                        <audio class="audio-element" id="myAudio" controls>
+                            <source src="../static/{{ i[2] }}" type="audio/mpeg">
+                            Ваш браузер не поддерживает аудио элемент.
+                        </audio>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    <form class="message-form" method="post" onsubmit="handleSubmit()">
+        <input type="text" id="story" name="story" placeholder="Позови меня, и я приду к тебе💫">
+        <button id="submit-button" class="button" type="submit">Отправить</button>
+        <span id="loadingIndicator" style="display: none;">Загрузка...</span>
+    </form>
+
+    <div class="image-container" style="bottom: 3%; left: 0.3%;">
+<!--        <img src="{{ url_for('static', filename='img/cat.png') }}" alt="тут кот" style="transform: scaleX(-1);">-->
+    </div>
+
+    <script>
+        submitted = false;
+        function handleSubmit() {
+            document.getElementById('submit-button').style.backgroundColor = '#005c7a';
+            if (submitted) document.getElementById('story').value = "";
+            window["submitted"] = true;
+<!--            document.getElementById('story').placeholder = "Сообщение отправлено, пожалуйста подождите";-->
+        }
+    </script>
+    <script src="../static/js/candy.js"></script>
+
+
+{% endblock %}

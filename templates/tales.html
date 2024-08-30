@@ -1,0 +1,95 @@
+{% extends "index.html" %}
+<!-- ЭТО КОД, ОТВЕЧАЮЩИЙ ЗА КРАСОТУ ДИАЛОГА -->
+{% block content %}
+
+<link href="{{ url_for('static', filename='css/tales.css') }}" rel="stylesheet">
+
+<div class="container">
+    {% for i, j, k in tales %}
+    <div class="link-container">
+        <button class="delete-button" onclick="del_func('{{ i }}')" style="background-image: url('{{ url_for('static', filename='img/del.png') }}');"></button>
+
+{#        <button class="delete-button" onclick="del_func('{{ i }}')">del</button>#}
+        <a class="custom-link" href="/tale/{{ i }}">{{ j }}</a>
+        <button class="edit-button" onclick="editFunction('{{ i }}')" style="background-image: url('{{ url_for('static', filename='img/change.png') }}');"></button>
+    {% if not k %}
+    <button class="create-all-story-button" onclick="this.remove(); AllStory('{{ i }}');">Опубликовать</button>
+    {% endif %}
+    </div>
+    {% endfor %}
+</div>
+
+<div class="image-container" style="bottom: 10%; right: 2%;">
+    <img src="{{ url_for('static', filename='img/rocet.png') }}" alt="Image 2">
+</div>
+
+
+
+<!-- Второе изображение -->
+<div class="image-container" style="top: 10%; left: 10px;">
+    <img src="{{ url_for('static', filename='img/robi.png') }}" alt="Image 1" style="transform: scale(-1, -1); ">
+</div>
+
+
+
+<script>
+        function editFunction(id) {
+        var link = document.querySelector('.custom-link[href="/tale/' + id + '"]');
+        // Создаем текстовое поле с текущим текстом ссылки
+        var input = document.createElement('input');
+        input.value = link.textContent;
+        link.parentNode.replaceChild(input, link);
+        input.focus();
+        input.select();
+        input.addEventListener('blur', function(event) {
+            var newLink = document.createElement('a');
+            newLink.href = window.location.pathname.substring(0, window.location.pathname.length-1)+ "/" + id;
+            newLink.textContent = input.value;
+            newLink.className = 'custom-link';
+            input.parentNode.replaceChild(newLink, input);
+            fetch('/tales', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    id: id,
+                    newText: input.value
+                })
+            });
+            event.preventDefault();
+        });
+
+
+
+        input.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                input.blur();
+            }
+        });
+    }
+
+    async function AllStory(id) {
+
+    const response = await fetch('/get-all-story/' + id, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                id: id,
+            })
+        });
+
+    const data = await response.json();
+    if (data.url) {
+        window.location.href = data.url;
+    }
+  }
+
+    function del_func(id) {
+    var element = document.querySelector('.link-container button[onclick="del_func(\'' + id + '\')"]').parentNode;
+    element.remove();
+    fetch("/delete/tale/" + id, {
+    method: 'POST'
+    });
+}
+
+</script>
+{% endblock %}

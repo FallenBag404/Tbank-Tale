@@ -1,0 +1,134 @@
+    .custom-link {
+        color: #e4ecfc;
+        text-decoration: none;
+        background-color: #57109e;
+        padding: 6px;
+        border-radius: 6px;
+        transition: transform 0.3s, background-color 0.3s;
+        font-size: 25px; /* Увеличен размер шрифта */
+        margin-right: 20px; /* Отступ справа для разделения ссылок */
+    }
+
+    .custom-link:hover {
+        color: #e4ecfc;
+        background-color: #0ed3e1;
+        transform: scale(1.1);
+    }
+
+    .link-container {
+        margin-bottom: 32px; /* Расстояние между ссылками */
+        display: flex; /* Расположение элементов в ряд */
+        align-items: center; /* Выравнивание по центру по вертикали */
+        margin-left: 30%;
+    }
+
+    .image-container {
+        position: fixed;
+        z-index: 10;
+    }
+
+
+    .image-container img {
+        width: 20vw; /* Относительные единицы измерения */
+        height: auto; /* Автоматическая высота */
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
+    }
+
+    .create-all-story-button{
+        cursor: pointer;
+        padding: 10px; /* Размер кнопки */
+        border: none;
+        background-color: #FF7E00;
+        color: white;
+        border-radius: 6px;
+        margin-left: 3%;
+    }
+
+    .delete-button{
+        cursor: pointer;
+        padding: 10px; /* Размер кнопки */
+        border: none;
+        background-color: #900020;
+        color: white;
+        border-radius: 6px;
+        margin-right: 3%;
+    }
+
+    /*.edit-button {*/
+    /*    cursor: pointer;*/
+    /*    padding: 10px; !* Размер кнопки *!*/
+    /*    border: none;*/
+    /*    background-color: #0ed3e1;*/
+    /*    color: white;*/
+    /*    border-radius: 6px;*/
+    /*}*/
+
+    /* Media queries для адаптивного дизайна */
+    @media (max-width: 1200px) {
+        .custom-link {
+            font-size: 20px; /* Уменьшенный размер шрифта */
+            margin-right: 5px; /* Уменьшенный отступ справа */
+        }
+
+        /*.edit-button {*/
+        /*    padding: 8px; !* Уменьшенный размер кнопки *!*/
+        /*}*/
+
+        .link-container {
+            margin-left: 20%; /* Уменьшенный отступ слева */
+        }
+
+        .image-container img {
+            width: 25vw; /* Увеличиваем относительный размер изображений */
+        }
+    }
+
+    @media (max-width: 768px) {
+        .custom-link {
+            font-size: 16px; /* Еще меньший размер шрифта */
+            margin-right: 3px; /* Еще меньший отступ справа */
+        }
+
+        /*.edit-button {*/
+        /*    padding: 6px; !* Еще меньший размер кнопки *!*/
+        /*}*/
+
+        .link-container {
+            margin-left: 10%; /* Еще меньший отступ слева */
+        }
+
+        .image-container img {
+            width: 30vw; /* Еще больший относительный размер изображений */
+        }
+    }
+
+
+    .edit-button {
+    width: 40px; /* Adjust size as needed */
+    height: 40px; /* Adjust size as needed */
+    border: none;
+    background-color: transparent; /* Remove any background color */
+    background-size: contain; /* Ensure the image scales to fit */
+    background-repeat: no-repeat; /* Prevent tiling of the image */
+    cursor: pointer; /* Show pointer cursor on hover */
+    padding: 0; /* Remove any default padding */
+    outline: none; /* Remove default outline */
+}
+
+
+
+    .delete-button {
+    width: 50px; /* Adjust size as needed */
+    height: 50px; /* Adjust size as needed */
+    border: none;
+    background-color: transparent; /* Remove any background color */
+    background-size: contain; /* Ensure the image scales to fit */
+    background-repeat: no-repeat; /* Prevent tiling of the image */
+    cursor: pointer; /* Show pointer cursor on hover */
+    padding: 0; /* Remove any default padding */
+    outline: none; /* Remove default outline */
+}
