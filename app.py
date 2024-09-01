@@ -384,7 +384,7 @@ def publication_view(publ_id):
 
 
 def main():
-    app.run(host="0.0.0.0", debug=True, port=os.getenv("PORT", default=5000))
+    app.run(host="0.0.0.0", debug=True, port=80)
 
 
 if __name__ == "__main__":
