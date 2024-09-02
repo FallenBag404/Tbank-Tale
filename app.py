@@ -381,3 +381,8 @@ def publication_view(publ_id):
         title = db_sess.query(Full_Stories).filter(Full_Stories.id == publ_id).first().title
         picture = db_sess.query(Full_Stories).filter(Full_Stories.id == publ_id).first().picture
         return render_template('publicatioN.html', autor=autor, text=text, title=title, picture=picture)
+
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", debug=True, port=80)
